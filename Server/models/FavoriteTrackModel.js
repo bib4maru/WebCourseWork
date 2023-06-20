@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
+import mongoose, {Schema,Types} from "mongoose";
 
-const FavoriteTrack = new mongoose.Schema ({
-    track : {type: mongoose.Schema.ObjectId, ref: "Tracks" },
-    ownerUser : {type: mongoose.Schema.ObjectId, ref: "Users"}
+const FavoriteTrack = new Schema ({
+    track : {type: Schema.ObjectId, ref: "Tracks" },
+    ownerUser : {type: Schema.ObjectId, ref: "Users" }
 })
 
-export default mongoose.model("Collection",FavoriteTrack);
+export const FvTrack = mongoose.model("Collection",FavoriteTrack);

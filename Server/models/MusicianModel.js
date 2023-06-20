@@ -1,7 +1,21 @@
-import mongoose from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
-const MusicianSchema = new mongoose.Schema(
-    {username: String,Firstname: String, Surname: String}
+const MusicianSchema = new Schema(
+    {
+        Username: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        Firstname: {
+            type: String,
+            required: true
+        }, 
+        Surname: {
+            type: String,
+            required: true
+        }
+    }
 )
 
-export default mongoose.model("Musicians",MusicianSchema);
+export const Musician = mongoose.model("Musicians",MusicianSchema);

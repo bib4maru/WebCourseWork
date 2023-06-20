@@ -56,7 +56,7 @@ app.post("/media/image",ImgUpload.single("image"));
 app.post("/media/audio",AudioUpload.single("audio"));
 
 //Действия администратора
-app.post("/user",UserController.Create);
+app.post("/user/create",UserController.Create);
 app.get("/users",UserController.GetAll);
 app.delete("/user/delete",UserController.Delete);
 

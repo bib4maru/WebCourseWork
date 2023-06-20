@@ -1,12 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, {Schema,Types} from "mongoose";
 
-const TrackSchema = new mongoose.Schema(
+const TrackSchema = new Schema(
     {
-        name: String,
+        name: {
+            type: String,
+            required: true
+        },
         picture: String,
         audio: String,
-        owner: {type: mongoose.Schema.ObjectId, ref: "Musicians"}
+        owner: {type: Schema.ObjectId, ref: "Musicians"}
     }
 )
 
-export default mongoose.model("Tracks", TrackSchema);
+export const Track = mongoose.model("Tracks", TrackSchema);
