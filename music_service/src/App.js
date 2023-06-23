@@ -2,15 +2,15 @@ import { ThemeProvider } from "@mui/material";
 import { theme } from "./styles/Theme";
 import "./styles/App.css"
 import UserLayout from "./Components/UI/Layout/UserLayout";
-import Main from "./Pages/Main";
-
+import AppRouter from "./Components/AppRouter";
+import { BrowserRouter } from "react-router-dom";
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <UserLayout>
-        <Main/>
-      </UserLayout>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <AppRouter/>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

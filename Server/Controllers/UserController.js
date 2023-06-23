@@ -33,14 +33,14 @@ export const Create = async (req,res) => {
 export const Login = async (req,res) => {
     try {
         const password = req.body.password;
-        const user = await User.find({login: req.body.login});
+        const user = await User.findOne({login: req.body.login});
         if (!user) {
             return res.status(404).json({
                 msg: 'Неверный логин или пароль'
             });
         }
 
-        const ValidPassword = bcrypt.compareSync(password,user.password);
+        const ValidPassword = bcrypt.compare(password,user.password);
         if (!ValidPassword) {
             return res.status(403).json({
                 msg: 'Неверный логин или пароль'

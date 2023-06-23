@@ -1,10 +1,13 @@
+import { Box, Grid } from '@mui/material';
 import React from 'react';
 
 const TrackList = () => {
     return (
-        <div>
+    <Grid container direction="column">
+        <Box p={2}>
             
-        </div>
+        </Box>
+    </Grid>       
     );
 };
 
