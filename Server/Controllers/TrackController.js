@@ -30,8 +30,20 @@ export const Create = async (req,res) => {
 
 export const GetAll = async (req,res) => {
     try {
-        let tracks = await Track.find().exec();
-        res.json(tracks);
+        const musicians = await Musician.find();
+        const musiciansId = musicians.map((musician) => musician._id);
+        const  Tracks = await Track.find({owner: { $in: musiciansId}});
+
+        const result = musicians.map((musician) => {
+            const musiciansTracks = Tracks.filter((track) => track.owner.toString() === musician._id.toString());
+            return {
+                musician: musician.Username,
+                tracks: musiciansTracks,
+            };
+        });
+
+
+        res.json(result);
     }catch (e) {
         console.log("Error: ",e);
         res.status(500).json({

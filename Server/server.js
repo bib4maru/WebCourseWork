@@ -13,6 +13,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use('/media/', express.static('Media'));
+
 
 const ImgStorage = multer.diskStorage({
     destination: (_,file,cb) => {
@@ -37,7 +39,8 @@ var AudioUpload = multer({storage:AudioStorage});
 
 //Действия пользователя
 app.post("/login",UserController.Login);
-app.get("/tracks",TrackController.GetAll);
+app.get("/tracks",CheckAuth,TrackController.GetAll);
+app.get("/musician/:id",CheckAuth,MusicianController.GetOne);
 app.post("/fvtrack/create",FavoriteTrackController.Create);
 app.get("/fvtracks",FavoriteTrackController.GetAll);
 app.delete("/fvtrack/delete",FavoriteTrackController.Delete);

@@ -78,7 +78,7 @@ export const Delete = async (req,res) => {
 
 export const GetOne = async (req,res) => {
     try {
-        const id = req.body.id;
+        const id = req.params.id;
         const musician = await Musician.findById({ _id: id}).exec();
         res.json(musician);
     } catch (e) {

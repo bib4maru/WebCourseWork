@@ -6,3 +6,7 @@ export const UsersRoutes = [
     {path: "/main", element: <Main/> },
     {path: "/tracks", element: <TracksPage/>}
 ]
+
+export const NoAuthRoutes = [
+    {path: "/", element : <Authorization/>}
+]

@@ -21,3 +21,17 @@ export const useUser = create(persist(devtools(set => ({
 })),
     {name: "user-storage" }
 ))
+
+export const useTracks = create(set => ({
+    tracks: [],
+    setTracks: (arr) => set ( () => {
+        return {tracks: arr} 
+    })
+}))
+
+export const useSingleMusician = create (set => ({
+    musician: {},
+    setMusician: (obj) => set ( () => {
+        return {musician: obj} 
+    }),
+}))
