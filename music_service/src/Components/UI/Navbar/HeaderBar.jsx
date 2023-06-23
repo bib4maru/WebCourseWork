@@ -25,7 +25,7 @@ const HeaderBar = () => {
                     <HomeIcon/>
                 </IconButton>
                 <Button variant='text' size='large' color='secondary' sx={{mr: "80px"}} onClick={() => {navigate("/tracks")}} >Треки</Button>
-                <Button variant='text' size='large' color='secondary'sx={{mr: "650px"}} >Коллекция</Button>
+                <Button variant='text' size='large' color='secondary'sx={{mr: "650px"}} onClick={() => {navigate("/collection")}} >Коллекция</Button>
                 <Button color="secondary" onClick={logOut}> 
                   Выйти  
                 </Button>

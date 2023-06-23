@@ -41,8 +41,8 @@ var AudioUpload = multer({storage:AudioStorage});
 app.post("/login",UserController.Login);
 app.get("/tracks",CheckAuth,TrackController.GetAll);
 app.get("/musician/:id",CheckAuth,MusicianController.GetOne);
-app.post("/fvtrack/create",FavoriteTrackController.Create);
-app.get("/fvtracks",FavoriteTrackController.GetAll);
+app.post("/fvtrack/create",CheckAuth,FavoriteTrackController.Create);
+app.get("/fvtracks/:id",CheckAuth,FavoriteTrackController.GetAll);
 app.delete("/fvtrack/delete",FavoriteTrackController.Delete);
 
 //Действия контент менеджера

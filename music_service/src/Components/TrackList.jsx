@@ -11,10 +11,6 @@ const TrackList = () => {
 
     useEffect(() => {
         getAllTracks().then(data => setTracks(data));
-        // const asyncfunc = async () => {
-        //     await getAllTracks().then(data => setTracks(data));
-        // }
-        // asyncfunc();
     },[]);
 
     return (

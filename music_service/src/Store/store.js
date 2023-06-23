@@ -35,3 +35,10 @@ export const useSingleMusician = create (set => ({
         return {musician: obj} 
     }),
 }))
+
+export const useFvTracks = create(set => ({
+    fvtracks: [],
+    setTracks: (arr) => set ( () => {
+        return {fvtracks: arr} 
+    })
+}))

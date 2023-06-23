@@ -5,7 +5,12 @@
 
 .track {
     margin: 20px;
+    font-size: 18px;
     padding: 10px;
     display: flex;
     align-items: center;
+}
+.musician {
+    font-size: 15px;
+    color:gray;
 }
