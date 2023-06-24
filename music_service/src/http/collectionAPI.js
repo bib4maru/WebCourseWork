@@ -9,3 +9,8 @@ export const addtoCollection = async (UserId,track) => {
     const {data} = await api.post("/fvtrack/create", {user: UserId, track: track});
     return data
 }
+
+export const deleteFvTrack = async (UserId,trackId) => {
+    const {data} = await api.delete("/fvtrack/delete", {data: { user: UserId, track: trackId }});
+    return data
+}

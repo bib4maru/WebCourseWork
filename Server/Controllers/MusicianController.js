@@ -41,13 +41,13 @@ export const Update = async (req,res) => {
     try {
         const newUsername = req.body.username;
         const MusicianId = req.body.id;
-        const Samename = await Musician.find({username: newUsername}).exec();
+        const Samename = await Musician.find({Username: newUsername}).exec();
         if (Samename.length != 0) {
             res.status(500).json({
                 msg: "Иcполнитель с таким псевдонимом уже существует!"
             })
         } else {
-            await Musician.updateOne({_id: MusicianId}, {username: newUsername, Firstname: req.body.Firstname, Surname: req.body.Surname});
+            await Musician.updateOne({_id: MusicianId}, {Username: newUsername, Firstname: req.body.Firstname, Surname: req.body.Surname});
             res.json({ok : true, description : ""});
         }
     } catch (e) {

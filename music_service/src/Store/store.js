@@ -42,3 +42,17 @@ export const useFvTracks = create(set => ({
         return {fvtracks: arr} 
     })
 }))
+
+export const useUsers = create(set => ({
+    users: [],
+    setUsers: (arr) => set ( () => {
+        return {users: arr} 
+    })
+}))
+
+export const useMusicians = create(set => ({
+    musicians: [],
+    setMusicians: (arr) => set ( () => {
+        return {musicians: arr} 
+    })
+}))

@@ -1,7 +1,9 @@
-import { Box, Card, Grid } from '@mui/material';
-import React from 'react';
+import { Box, Card, Grid, TextField } from '@mui/material';
+import React, { useState } from 'react';
 import UserLayout from '../Components/UI/Layout/UserLayout';
 import TrackList from '../Components/TrackList';
+import { useTracks } from '../Store/store';
+import {shallow} from 'zustand/shallow';
 
 const TracksPage = () => {
     return (

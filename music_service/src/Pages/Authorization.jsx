@@ -15,9 +15,8 @@ const Authorization = () => {
             SetIsAuth(true);
             navigate("/main");
         } catch (e) {
-            SetMes(e);
+            SetMes(e.response.data.msg);
             alert(mes);
-            setOpen(true);
             setLogin("");
             setPassword("");
         }
@@ -29,7 +28,6 @@ const Authorization = () => {
     const {isAuth,SetIsAuth} = useUser((state) => ({ isAuth: state.isAuth, SetIsAuth : state.SetIsAuth}));
     const [authlogin,setLogin] = useState("");
     const [password,setPassword] = useState("");
-    const [open,setOpen] = useState(false);
     const navigate = useNavigate();
 
     return (

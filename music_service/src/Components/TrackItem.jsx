@@ -4,6 +4,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import { useUser } from '../Store/store';
 import { addtoCollection } from '../http/collectionAPI';
+import { DownloadAudio } from '../http/trackAPI';
 
 const TrackItem = (props) => {
     const userId = useUser(state => (state.id));
@@ -24,13 +25,13 @@ const TrackItem = (props) => {
                 <div>{props.track.name}</div>
                 <div className='musician'>{props.musician}</div>
             </Grid>
-            <Tooltip title="Добавить в коллекцию" onClick={addToCollection} >
-                <IconButton sx={{ml: "auto"}} color='secondary'>
+            <Tooltip title="Добавить в коллекцию">
+                <IconButton sx={{ml: "auto"}} color='secondary' onClick={addToCollection}>
                     <PlaylistAddIcon/>
                 </IconButton>
             </Tooltip>
             <Tooltip title="Скачать аудио">
-            <IconButton color='secondary'>
+            <IconButton color='secondary'onClick={() => DownloadAudio(props.track.audio, `${props.musician} - ${props.track.name}`)}>
                 <DownloadIcon/>
             </IconButton> 
             </Tooltip>

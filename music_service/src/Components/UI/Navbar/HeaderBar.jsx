@@ -14,6 +14,7 @@ const HeaderBar = () => {
         resetId(null);
         resetRole(null);
         resetAuth(false);
+        localStorage.removeItem("token");
         navigate("/");
     };
     return (

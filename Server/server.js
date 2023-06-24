@@ -43,25 +43,30 @@ app.get("/tracks",CheckAuth,TrackController.GetAll);
 app.get("/musician/:id",CheckAuth,MusicianController.GetOne);
 app.post("/fvtrack/create",CheckAuth,FavoriteTrackController.Create);
 app.get("/fvtracks/:id",CheckAuth,FavoriteTrackController.GetAll);
-app.delete("/fvtrack/delete",FavoriteTrackController.Delete);
+app.delete("/fvtrack/delete",CheckAuth,FavoriteTrackController.Delete);
 
 //Действия контент менеджера
-app.post("/track/create",TrackController.Create);
-app.delete("/track/delete",TrackController.Delete);
-app.patch("/track/edit", TrackController.Update);
+app.post("/track/create",CheckAuth,CheckManagerRole,TrackController.Create);
+app.delete("/track/delete",CheckAuth,CheckManagerRole,TrackController.Delete);
+// app.get("/track",TrackController.getOneTrack);
+// app.patch("/track/edit",CheckAuth,CheckManagerRole, TrackController.Update);
 
-app.post("/musician",MusicianController.Create);
-app.get("/musicians",MusicianController.GetAll);
-app.patch("musician/edit",MusicianController.Update);
-app.delete("/musician/delete",MusicianController.Delete);
+app.post("/musician",CheckAuth,CheckManagerRole,MusicianController.Create);
+app.get("/musicians",CheckAuth,CheckManagerRole,MusicianController.GetAll);
+app.patch("/musician/edit",CheckAuth,CheckManagerRole,MusicianController.Update);
+app.delete("/musician/delete",CheckAuth,CheckManagerRole,MusicianController.Delete);
 
-app.post("/media/image",ImgUpload.single("image"));
-app.post("/media/audio",AudioUpload.single("audio"));
+app.post("/media/image",ImgUpload.single("image"), (req, res) => {
+    res.status(200).json({ok : true, description : ""});
+});
+app.post("/media/audio",AudioUpload.single("audio"), (req, res) => {
+    res.status(200).json({ok : true, description : ""});
+});
 
 //Действия администратора
-app.post("/user/create",UserController.Create);
-app.get("/users",UserController.GetAll);
-app.delete("/user/delete",UserController.Delete);
+app.post("/user/create",CheckAuth,CheckAdminRole,UserController.Create);
+app.get("/users:id",CheckAuth,CheckAdminRole,UserController.GetAll);
+app.delete("/user/delete",CheckAuth,CheckAdminRole,UserController.Delete);
 
 app.listen(5500,(err) => {
     if (err) {

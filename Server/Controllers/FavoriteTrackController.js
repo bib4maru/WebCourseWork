@@ -26,8 +26,8 @@ export const Create = async (req,res) => {
 export const Delete = async (req,res) => {
     try {
         const fv_trackId = req.body.track;
-        const userId = req.params.id;
-        await FvTrack.findOneAndDelete({_id: fv_trackId});
+        const userId = req.body.user;
+        await FvTrack.findOneAndDelete({ track: fv_trackId, ownerUser: userId});
         res.json({ok : true, description : ""});
     } catch (e) {
         console.log("Error: ",e);
