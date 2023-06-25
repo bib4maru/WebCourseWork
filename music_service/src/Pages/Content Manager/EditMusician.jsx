@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useMusicians } from '../Store/store';
+import React, { useEffect, useRef, useState } from 'react';
+import { useMusicians } from '../../Store/store';
 import {shallow} from 'zustand/shallow';
-import { Edit, getAllMusicians } from '../http/musicianAPI';
+import { Edit, getAllMusicians } from '../../http/musicianAPI';
 import {  Box, Button, Container, CssBaseline, TextField, Autocomplete } from '@mui/material';
-import ManagerLayout from '../Components/UI/Layout/ManagerLayout';
+import ManagerLayout from '../../Components/UI/Layout/ManagerLayout';
 const EditMusician = () => {
     const {musicians,setMusicians} = useMusicians (state => ({musicians: state.musicians, setMusicians: state.setMusicians}),shallow);
     const [id,setId] = useState(null);
     const [value,setValue] = useState("");
     const [Firstname,setFirstname] = useState("");
     const [Surname,setSurname] = useState("");
-
+    const [autovalue,setAutoValue] = useState(null);
     useEffect(() => {
         getAllMusicians().then(data => setMusicians(data))
     },[])
@@ -19,13 +19,17 @@ const EditMusician = () => {
         try {
             e.preventDefault();
             const response = await Edit(id,value,Firstname,Surname);
-            await getAllMusicians().then(data => setMusicians(data));
+            setTimeout( async () => {
+                await getAllMusicians().then(data => {setMusicians(data)});
+            },50)
             setValue("");
+            setAutoValue(null);
             setFirstname("");
             setSurname("");
             setId(null);
         } catch (e) {
             alert(e.response.data.msg);
+            setAutoValue(null);
             setValue("");
             setFirstname("");
             setSurname("");
@@ -49,10 +53,11 @@ const EditMusician = () => {
                         sx={{ width: 600 }}
                         id='musicians'
                         color='secondary'
+                        value={autovalue}
                         options={musicians}
                         getOptionLabel={(option) => option.Username}
                         onChange={(event,newValue) => { if (newValue != null) {setId(newValue._id);setValue(newValue.Username);
-                            setFirstname(newValue.Firstname);setSurname(newValue.Surname);
+                            setFirstname(newValue.Firstname);setSurname(newValue.Surname);setAutoValue(newValue);
                         
                         }}}
                         renderInput={(params) => <TextField {...params} label="Выбор исполнителя" color='secondary' margin='normal' required fullWidth />}

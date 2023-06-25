@@ -9,16 +9,16 @@ const FvTrackItem = (props) => {
     const userId = useUser(state => (state.id));
     const {mes,SetMes} = useUser((state) => ({mes: state.errorMessage, SetMes: state.SetMes}));
     const setFvTracks = useFvTracks(state => (state.setTracks));
-
+    const setFilteredTracks = useFvTracks(state => (state.setFilteredTracks));
 
     const deleteFromCollection = async (e) => {
         try {
             e.preventDefault();
             await deleteFvTrack(userId,props.track._id);
-            await getAllFvTracks(userId).then(data => setFvTracks(data));
+            await getAllFvTracks(userId).then(data => {setFvTracks(data); setFilteredTracks(data)});
         } catch (e) {
             SetMes(e.response.data.msg);
-            alert(mes);
+            alert(e.response.data.msg);
         }
     }
 

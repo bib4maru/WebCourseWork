@@ -39,6 +39,7 @@ var AudioUpload = multer({storage:AudioStorage});
 
 //Действия пользователя
 app.post("/login",UserController.Login);
+app.post("/reg",UserController.Create);
 app.get("/tracks",CheckAuth,TrackController.GetAll);
 app.get("/musician/:id",CheckAuth,MusicianController.GetOne);
 app.post("/fvtrack/create",CheckAuth,FavoriteTrackController.Create);
@@ -48,8 +49,6 @@ app.delete("/fvtrack/delete",CheckAuth,FavoriteTrackController.Delete);
 //Действия контент менеджера
 app.post("/track/create",CheckAuth,CheckManagerRole,TrackController.Create);
 app.delete("/track/delete",CheckAuth,CheckManagerRole,TrackController.Delete);
-// app.get("/track",TrackController.getOneTrack);
-// app.patch("/track/edit",CheckAuth,CheckManagerRole, TrackController.Update);
 
 app.post("/musician",CheckAuth,CheckManagerRole,MusicianController.Create);
 app.get("/musicians",CheckAuth,CheckManagerRole,MusicianController.GetAll);
@@ -67,6 +66,7 @@ app.post("/media/audio",AudioUpload.single("audio"), (req, res) => {
 app.post("/user/create",CheckAuth,CheckAdminRole,UserController.Create);
 app.get("/users:id",CheckAuth,CheckAdminRole,UserController.GetAll);
 app.delete("/user/delete",CheckAuth,CheckAdminRole,UserController.Delete);
+app.patch("/user/edit",CheckAuth,CheckAdminRole,UserController.Update);
 
 app.listen(5500,(err) => {
     if (err) {

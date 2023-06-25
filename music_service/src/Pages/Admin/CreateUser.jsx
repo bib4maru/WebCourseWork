@@ -1,31 +1,32 @@
+import { Autocomplete, Avatar, Box, Button, Container, CssBaseline, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import ManagerLayout from '../Components/UI/Layout/ManagerLayout';
-import { Avatar, Box, Button, Container, CssBaseline, TextField, Typography } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { Create } from '../http/musicianAPI';
+import AdminLayout from '../../Components/UI/Layout/AdminLayout';
+import { addUser } from '../../http/userAPI';
 
-const AddMusician = () => {
-    const [username,setUsername] = useState("");
-    const [Firstname,setFirstname] = useState("");
-    const [Surname,setSurname] = useState("");
+const roles = [ "User", "Content Manager"];
+const CreateUser = () => {
+    const [authlogin,setLogin] = useState("");
+    const [password,setPassword] = useState("");
+    const [role,setRole] = useState("");
+    
 
     const handleAdd = async (e) => {
         try {
             e.preventDefault();
-            const response = await Create(username,Firstname,Surname);
-            setUsername("");
-            setFirstname("");
-            setSurname("");
+            const response = await addUser(authlogin,password,role);
+            setLogin("");
+            setPassword("");
+            setRole("");
         } catch (e) {
             alert(e.response.data.msg);
-            setUsername("");
-            setFirstname("");
-            setSurname("");
+            setLogin("");
+            setPassword("");
+            setRole("");
         }
     }
-
     return (
-        <ManagerLayout>
+        <AdminLayout>
             <Container component="main" maxWidth="xs">
             <CssBaseline/>
             <Box
@@ -40,7 +41,7 @@ const AddMusician = () => {
                     <PersonAddIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Добавление исполнителя
+                    Добавление пользователя
                 </Typography>
                 <Box component="form" sx={{ mt: 1 }}>
                     <TextField
@@ -48,32 +49,32 @@ const AddMusician = () => {
                         margin='normal'
                         required
                         fullWidth
-                        id='Username'
-                        label='Псевдоним'
-                        name='Username'
+                        id='login'
+                        label='Логин'
+                        name='login'
                         autoFocus
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
+                        value={authlogin}
+                        onChange={e =>setLogin(e.target.value)}
                     />
                     <TextField
                         color='secondary'
                         margin='normal'
                         required
                         fullWidth
-                        name='Firstname'
-                        label='Имя'
-                        value={Firstname}
-                        onChange={e =>setFirstname(e.target.value)}
+                        name='password'
+                        label='Пароль'
+                        id='password'
+                        value={password}
+                        onChange={e =>setPassword(e.target.value)}
                     />
-                    <TextField
+                    <Autocomplete
+                        id='role'
                         color='secondary'
-                        margin='normal'
-                        required
+                        options={roles}
                         fullWidth
-                        name='Surname'
-                        label='Фамилия'
-                        value={Surname}
-                        onChange={e =>setSurname(e.target.value)}
+                        value={role}
+                        onChange={(event,newValue) => setRole(newValue)}
+                        renderInput={(params) => <TextField {...params} label="Выбор роли" color='secondary' margin='normal' required />}
                     />
                     <Button
                         color='secondary'
@@ -88,8 +89,8 @@ const AddMusician = () => {
                 </Box>
             </Box>
         </Container>
-        </ManagerLayout>
+        </AdminLayout>
     );
 };
 
-export default AddMusician;
+export default CreateUser;

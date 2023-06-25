@@ -1,7 +1,7 @@
 import React from 'react';
-import ManagerLayout from '../Components/UI/Layout/ManagerLayout';
+import ManagerLayout from '../../Components/UI/Layout/ManagerLayout';
 import { Box, Button, Card, Grid, TextField } from '@mui/material';
-import TracksMain from '../Components/UI/CardList/TracksMain';
+import TracksMain from '../../Components/UI/CardList/TracksMain';
 import { useNavigate } from 'react-router-dom';
 
 const ManagerTracks = () => {

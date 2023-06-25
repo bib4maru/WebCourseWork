@@ -51,31 +51,7 @@ export const GetAll = async (req,res) => {
         })
     }
 }
-export const getOneTrack = async (req,res) => {
-    try {
-        const TrackId = req.body.id;
-        const track = await Track.findOne({_id: TrackId});
-        res.json(track)
-    } catch (e) {
-        console.log("Error: ",e);
-        res.status(500).json({
-            msg: "Не удалось получить трек!"
-        })
-    }
-}
 
-export const Update = async (req,res) => {
-    try {
-        const TrackId = req.params.id;
-        await Track.updateOne({_id:TrackId}, {name: req.body.name, picture: req.body.picture, audio: req.body.audio});
-        res.json({ok : true, description : ""});
-    } catch (e) {
-        console.log("Error: ",e);
-        res.status(500).json({
-            msg: "Не удалось обновить данный трек!"
-        })
-    }
-}
 
 export const Delete = async (req,res) => {
     try {

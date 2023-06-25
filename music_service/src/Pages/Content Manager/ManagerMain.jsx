@@ -1,5 +1,5 @@
 import React from 'react';
-import ManagerLayout from '../Components/UI/Layout/ManagerLayout';
+import ManagerLayout from '../../Components/UI/Layout/ManagerLayout';
 import { Typography } from '@mui/material';
 
 const ManagerMain = () => {

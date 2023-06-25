@@ -15,7 +15,7 @@ const TrackItem = (props) => {
             await addtoCollection(userId,props.track._id);
         } catch (e) {
             SetMes(e.response.data.msg);
-            alert(mes);
+            alert(e.response.data.msg);
         }
     }
     return (

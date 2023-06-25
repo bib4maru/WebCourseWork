@@ -1,35 +1,25 @@
-import { Avatar, Box, Button, Container, CssBaseline, TextField, Typography,Grid,Link } from '@mui/material';
+import { Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { useUser } from '../Store/store';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../http/userAPI';
+import { registration } from '../http/userAPI';
 
-const Authorization = () => {
-    const signIn = async (e) => {
+const Registration = () => {
+    const navigate = useNavigate();
+    const [authlogin,setLogin] = useState("");
+    const [password,setPassword] = useState("");
+    const handleRegistration = async (e) => {
         try {
             e.preventDefault();
-            const response = await login(authlogin,password);
-            newRole(response._role);
-            newId(response._id);
-            SetIsAuth(true);
-            navigate("/main");
+            const response = await registration(authlogin,password);
+            setLogin("");
+            setPassword("");
         } catch (e) {
-            SetMes(e.response.data.msg);
             alert(e.response.data.msg);
             setLogin("");
             setPassword("");
         }
     }
-
-    const newRole = useUser((state) => (state.SetRole));
-    const newId = useUser((state) => (state.SetId));
-    const {mes,SetMes} = useUser((state) => ({mes: state.errorMessage, SetMes: state.SetMes}));
-    const {isAuth,SetIsAuth} = useUser((state) => ({ isAuth: state.isAuth, SetIsAuth : state.SetIsAuth}));
-    const [authlogin,setLogin] = useState("");
-    const [password,setPassword] = useState("");
-    const navigate = useNavigate();
-
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
@@ -45,7 +35,7 @@ const Authorization = () => {
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Авторизация
+                    Регистрация
                 </Typography>
                 <Box component="form" sx={{ mt: 1 }}>
                     <TextField
@@ -78,22 +68,22 @@ const Authorization = () => {
                         fullWidth
                         variant='contained'
                         sx={{mt: 3, mb: 2}}
-                        onClick={signIn}
+                        onClick={handleRegistration}
                     >
-                        Войти
+                        Зарегистрироваться
                     </Button>
-                    <Grid container>
+                    <Grid container justifyContent="flex-end">
                         <Grid item>
-                            <Link href="" variant="body2" color="secondary" 
-                            onClick={(e) => {e.preventDefault(); navigate("/registration")}}>
-                                Еще нет аккаунта? Зарегистрироваться
+                            <Link href="" variant="body2" color='secondary' 
+                                onClick={(e) => {e.preventDefault(); navigate("/")}}>
+                                Уже есть аккаунт? Войти
                             </Link>
                         </Grid>
                     </Grid>
                 </Box>
             </Box>
         </Container>
-    );  
+    );
 };
 
-export default Authorization;
+export default Registration;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import ManagerLayout from '../Components/UI/Layout/ManagerLayout';
+import ManagerLayout from '../../Components/UI/Layout/ManagerLayout';
 import { Autocomplete, Avatar, Box, Button, Container, CssBaseline, TextField, Typography } from '@mui/material';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
-import { useMusicians } from '../Store/store';
+import { useMusicians } from '../../Store/store';
 import {shallow} from 'zustand/shallow';
-import { Delete, getAllMusicians } from '../http/musicianAPI';
+import { Delete, getAllMusicians } from '../../http/musicianAPI';
 
 const DeleteMusician = () => {
     const {musicians,setMusicians} = useMusicians (state => ({musicians: state.musicians, setMusicians: state.setMusicians}),shallow);

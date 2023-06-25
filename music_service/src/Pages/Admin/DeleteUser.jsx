@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import AdminLayout from '../Components/UI/Layout/AdminLayout';
-import { Autocomplete, Avatar, Box, Button, Container, CssBaseline, TextField, Typography } from '@mui/material';
+import AdminLayout from '../../Components/UI/Layout/AdminLayout';
+import { Autocomplete, Avatar, Box, Button, Container, CssBaseline, Icon, TextField, Typography } from '@mui/material';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
-import { deleteUser, getAllUsers } from '../http/userAPI';
-import { useUser, useUsers } from '../Store/store';
+import { deleteUser, getAllUsers } from '../../http/userAPI';
+import { useUser, useUsers } from '../../Store/store';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const DeleteUser = () => {
     const userId = useUser(state => (state.id));
     const {users,setUsers} = useUsers(state => ({ users: state.users, setUsers: state.setUsers}));
     const [id,setId] = useState(null);
+    const [autovalue,setAutoValue] = useState(null);
     useEffect(() => {
         getAllUsers(userId).then(data => setUsers(data));
     },[])
@@ -17,6 +19,7 @@ const DeleteUser = () => {
             e.preventDefault();
             await deleteUser(id);
             await getAllUsers(userId).then(data => setUsers(data));
+            setAutoValue(null);
         } catch (e) {
             alert(e.response.data.msg);
         }
@@ -44,9 +47,16 @@ const DeleteUser = () => {
                         sx={{ width: 600 }}
                         id='users'
                         color='secondary'
+                        value={autovalue}
                         options={users}
-                        getOptionLabel={(option) => `Логин:${option.login} Роль:${option.role}`}
-                        onChange={(event,newValue) => { if (newValue != null) setId(newValue._id)}}
+                        getOptionLabel={(option) => option.login}
+                        onChange={(event,newValue) => { if (newValue != null) {setId(newValue._id); setAutoValue(newValue)}}}
+                        renderOption={(props, option) => (
+                            <Box component="li" {...props}>
+                                <AccountCircleIcon/>
+                                {option.login}  (Роль: {option.role})
+                            </Box>
+                        )}
                         renderInput={(params) => <TextField {...params} label="Выбор пользователя" color='secondary' margin='normal' required fullWidth />}
                     />
                     <Button

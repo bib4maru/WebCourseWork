@@ -51,6 +51,7 @@ const AdminBar = () => {
                         onClose={handleClose}
                     >
                         <MenuItem color='secondary' onClick={() => {navigate("/user/create")}} >Добавить</MenuItem>
+                        <MenuItem color='secondary' onClick={() => {navigate("/user/edit")}} >Редактировать</MenuItem>
                         <MenuItem color='secondary' onClick={() => {navigate("/user/delete")}} >Удалить</MenuItem>
                     </Menu>
                     <Button color="secondary" onClick={logOut}> 

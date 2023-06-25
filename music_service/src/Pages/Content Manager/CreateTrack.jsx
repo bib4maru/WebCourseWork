@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import ManagerLayout from '../Components/UI/Layout/ManagerLayout';
-import StepWrapper from '../Components/StepWrapper';
+import ManagerLayout from '../../Components/UI/Layout/ManagerLayout';
+import StepWrapper from '../../Components/StepWrapper';
 import { Autocomplete, Button, Grid, TextField } from '@mui/material';
-import { useMusicians } from '../Store/store';
+import { useMusicians } from '../../Store/store';
 import {shallow} from 'zustand/shallow';
-import { getAllMusicians } from '../http/musicianAPI';
-import FileUpload from '../Components/FileUpload';
-import { CreateAudio, CreateImage, createTrack } from '../http/trackAPI';
-import { Audio_URL, Image_URL, api } from '../http';
+import { getAllMusicians } from '../../http/musicianAPI';
+import FileUpload from '../../Components/FileUpload';
+import { CreateAudio, CreateImage, createTrack } from '../../http/trackAPI';
+import { Audio_URL, Image_URL, api } from '../../http';
 import { useNavigate } from 'react-router-dom';
 
 const CreateTrack = () => {

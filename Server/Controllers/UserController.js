@@ -70,8 +70,8 @@ export const Login = async (req,res) => {
 
 export const GetAll = async (req,res) => {
     try {
-        const id = req.params.id;
-        const users = await User.find({_id: {$ne: id}});
+        // const id = req.params.id;
+        const users = await User.find({role: {$ne: "Admin"}});
         res.json(users);
     } catch (e) {
         console.log("Error: ",e);
@@ -91,6 +91,20 @@ export const Delete = async (req,res) => {
         console.log("Error: ",e);
         res.status(500).json({
             msg: "Не удалось удалить пользователя!"
+        })
+    }
+}
+
+export const Update = async (req,res) => {
+    try {
+        const userId = req.body.id;
+        const newRole = req.body.role;
+        await User.updateOne({ _id: userId}, {role: newRole});
+        res.json({ok : true, description : ""});
+    } catch (e) {
+        console.log("Error: ",e);
+        res.status(500).json({
+            msg: "Не удалось обновить данного пользователя!"
         })
     }
 }

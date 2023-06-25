@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import UserLayout from '../Components/UI/Layout/UserLayout';
+import UserLayout from '../../Components/UI/Layout/UserLayout';
 const Main = () => {
     return (
         <UserLayout>

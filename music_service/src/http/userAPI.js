@@ -21,3 +21,13 @@ export const deleteUser = async (id) => {
     const {data} = await api.delete("/user/delete", { data: {id: id}});
     return data
 }
+
+export const registration = async (Login,password) => {
+    const {data} = await api.post("/reg", {login: Login, password: password, role: "User"});
+    return data
+}
+
+export const Edit = async (id,role) => {
+    const {data} = await api.patch("/user/edit", {id: id, role: role});
+    return data
+}

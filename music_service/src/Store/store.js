@@ -24,8 +24,12 @@ export const useUser = create(persist(devtools(set => ({
 
 export const useTracks = create(set => ({
     tracks: [],
+    filteredtracks: [],
     setTracks: (arr) => set ( () => {
         return {tracks: arr} 
+    }),
+    setFilteredTracks: (arr) => set ( () => {
+        return {filteredtracks: arr} 
     })
 }))
 
@@ -38,8 +42,12 @@ export const useSingleMusician = create (set => ({
 
 export const useFvTracks = create(set => ({
     fvtracks: [],
+    filteredtracks: [],
     setTracks: (arr) => set ( () => {
         return {fvtracks: arr} 
+    }),
+    setFilteredTracks: (arr) => set ( () => {
+        return {filteredtracks: arr} 
     })
 }))
 

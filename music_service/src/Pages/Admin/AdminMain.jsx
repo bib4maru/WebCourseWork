@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminLayout from '../Components/UI/Layout/AdminLayout';
+import AdminLayout from '../../Components/UI/Layout/AdminLayout';
 import { Typography } from '@mui/material';
 
 const AdminMain = () => {
