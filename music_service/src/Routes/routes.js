@@ -13,6 +13,7 @@ import ManagerTracks from "../Pages/Content Manager/ManagerTracks";
 import Registration from "../Pages/Registration";
 import TracksPage from "../Pages/Client/TracksPage";
 import EditUser from "../Pages/Admin/EditUser";
+import EditTrack from "../Pages/Content Manager/EditTrack";
 export const UsersRoutes = [
     {path: "/", element : <Authorization/>},
     {path: "/main", element: <Main/> },
@@ -43,5 +44,6 @@ export const ManagerRoutes = [
     {path: "/musician/create", element: <AddMusician/>},
     {path: "/musician/delete", element: <DeleteMusician/>},
     {path: "/musician/edit", element: <EditMusician/>},
-    {path: "/registration", element: <Registration/>}
+    {path: "/registration", element: <Registration/>},
+    {path: "/tracks/edit/:id", element: <EditTrack/>}
 ]

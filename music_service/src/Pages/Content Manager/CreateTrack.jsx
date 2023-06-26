@@ -27,14 +27,18 @@ const CreateTrack = () => {
         if (activeStep !== 2) {
             setActiveStep(prev => prev + 1)
         } else {
-            CreateImage(picture);
-            CreateAudio(audio);
-            try {
-                createTrack(name,`${Image_URL}${picture.name}`, `${Audio_URL}${audio.name}`,musician);
-            } catch (e) {
-                alert(e.response.data.msg);
+            if (name == (null || undefined) || picture == (null || undefined) || audio == (null || undefined) || musician == (null || undefined)){
+                alert("Проверьте правильность введенных данных!");
+            } else {
+                try {
+                    CreateImage(picture);
+                    CreateAudio(audio);
+                    createTrack(name,`${Image_URL}${picture.name}`, `${Audio_URL}${audio.name}`,musician);
+                } catch (e) {
+                    alert(e.response.data.msg);
+                }
+                navigate("/tracks/main");
             }
-            navigate("/tracks/main");
         }
     }
 

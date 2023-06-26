@@ -48,8 +48,8 @@ app.delete("/fvtrack/delete",CheckAuth,FavoriteTrackController.Delete);
 
 //Действия контент менеджера
 app.post("/track/create",CheckAuth,CheckManagerRole,TrackController.Create);
+app.patch("/track/edit",TrackController.Update);
 app.delete("/track/delete",CheckAuth,CheckManagerRole,TrackController.Delete);
-
 app.post("/musician",CheckAuth,CheckManagerRole,MusicianController.Create);
 app.get("/musicians",CheckAuth,CheckManagerRole,MusicianController.GetAll);
 app.patch("/musician/edit",CheckAuth,CheckManagerRole,MusicianController.Update);

@@ -7,15 +7,15 @@ import TrackMainItem from '../ListItem/TrackMainItem';
 
 const TracksMain = () => {
     const {tracks,setTracks} = useTracks(state => ({tracks: state.tracks, setTracks: state.setTracks}),shallow);
-
+    const {filteredtracks,setFilteredTracks} = useTracks(state => ({filteredtracks: state.filteredtracks, setFilteredTracks: state.setFilteredTracks}),shallow);
     useEffect(() => {
-        getAllTracks().then(data => setTracks(data));
+        getAllTracks().then(data => {setTracks(data);setFilteredTracks(data);});
     },[]);
     return (
         <Grid container direction="column">
         <Box p={2}>
             {
-                tracks.map(tracksArr => <div key={tracksArr.musician}>{
+                filteredtracks.map(tracksArr => <div key={tracksArr.musician}>{
                     tracksArr.tracks.map(track => 
                         <TrackMainItem key={track._id} track={track} musician={tracksArr.musician} />
                         )

@@ -39,8 +39,8 @@ const ManagerBar = () => {
                     <IconButton edge="start" color="secondary" sx={{ml: "350px", mr: "100px"}} onClick={() => {navigate("/main")}}>
                         <HomeIcon/>
                     </IconButton>
-                    <Button  variant='text' size='large' color='secondary' sx={{mr: "80px"}} onClick={openTrackMenu}>Треки</Button>
-                    <Menu 
+                    <Button  variant='text' size='large' color='secondary' sx={{mr: "80px"}} onClick={() => {navigate("/tracks/main")}}>Треки</Button>
+                    {/* <Menu 
                         id='track_menu'
                         anchorEl={frAnchorEl}
                         keepMounted
@@ -56,7 +56,7 @@ const ManagerBar = () => {
                         onClose={handleTrackMenu}
                     >
                         <MenuItem color='secondary' onClick={() => {navigate("/tracks/main")}}>Главная</MenuItem>
-                    </Menu>
+                    </Menu> */}
                     <Button variant='text' size='large' color='secondary'sx={{mr: "650px"}} onClick={openMusicianMenu}>Исполнители</Button>
                     <Menu
                         d='musician_menu'

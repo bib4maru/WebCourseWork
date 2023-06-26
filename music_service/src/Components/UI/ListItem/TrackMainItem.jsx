@@ -10,11 +10,13 @@ import { useNavigate } from 'react-router-dom';
 const TrackMainItem = (props) => {
 
     const setTracks = useTracks(state => (state.setTracks));
+    const setFilteredTracks = useTracks(state => (state.setFilteredTracks));
+    const navigate = useNavigate();
     const handleDelete = async (e) => {
         try {
             e.preventDefault();
             await deleteTrack(props.track._id);
-            await getAllTracks().then(data => setTracks(data));
+            await getAllTracks().then(data => {setTracks(data); setFilteredTracks(data)});
         } catch (e) {
             alert(e.response.data.msg);
         }
@@ -29,6 +31,11 @@ const TrackMainItem = (props) => {
             <Tooltip title="Скачать аудио">
             <IconButton color='secondary' sx={{ml: "auto"}} onClick={() => DownloadAudio(props.track.audio, `${props.musician} - ${props.track.name}`)}>
                 <DownloadIcon/>
+            </IconButton> 
+            </Tooltip>
+            <Tooltip title="Редактировать">
+            <IconButton color='secondary' onClick={() => navigate(`/tracks/edit/${props.track._id}`)}>
+                <EditIcon/>
             </IconButton> 
             </Tooltip>
             <Tooltip title="Удалить">

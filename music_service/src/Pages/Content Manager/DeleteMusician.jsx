@@ -9,14 +9,17 @@ import { Delete, getAllMusicians } from '../../http/musicianAPI';
 const DeleteMusician = () => {
     const {musicians,setMusicians} = useMusicians (state => ({musicians: state.musicians, setMusicians: state.setMusicians}),shallow);
     const [id,setId] = useState(null);
+    const [autovalue,setAutoValue] = useState(null);
 
     const handleDelete = async (e) => {
         try {
             e.preventDefault();
             await Delete(id);
             await getAllMusicians().then(data => setMusicians(data));
+            setAutoValue(null);
         } catch (e) {
             alert(e.response.data.msg);
+            setAutoValue(null);
         }
     }
 
@@ -46,9 +49,10 @@ const DeleteMusician = () => {
                         sx={{ width: 600 }}
                         id='musicians'
                         color='secondary'
+                        value={autovalue}
                         options={musicians}
                         getOptionLabel={(option) => option.Username}
-                        onChange={(event,newValue) => { if (newValue != null) setId(newValue._id)}}
+                        onChange={(event,newValue) => { if (newValue != null) {setId(newValue._id); setAutoValue(newValue)}}}
                         renderInput={(params) => <TextField {...params} label="Выбор исполнителя" color='secondary' margin='normal' required fullWidth />}
                     />
                     <Button

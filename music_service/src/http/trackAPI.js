@@ -50,7 +50,7 @@ export const getOne = async (id) => {
     return data
 }
 
-export const Edit = async (name,picture,audio) => {
-    const {data} = await api.patch("/track/edit", {name: name, picture: picture, audio: audio});
+export const Edit = async (id,name,picture,audio) => {
+    const {data} = await api.patch("/track/edit", {id: id, name: name, picture: picture, audio: audio});
     return data
 }

@@ -66,3 +66,16 @@ export const Delete = async (req,res) => {
         })
     }
 } 
+
+export const Update = async (req,res) => {
+    try {
+        const TrackId = req.body.id;
+        await Track.updateOne({_id: TrackId}, {name: req.body.name, picture: req.body.picture, audio: req.body.audio});
+        res.json({ok : true, description : ""});
+    } catch (e)  {
+        console.log("Error: ",e);
+        res.status(500).json({
+            msg: "Не удалось обновить данный трек!"
+        })
+    }
+}
